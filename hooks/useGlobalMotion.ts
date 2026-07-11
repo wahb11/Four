@@ -15,6 +15,7 @@ export function useGlobalMotion(enabled = true) {
     const ctx = gsap.context(() => {
       const isMobile = window.matchMedia("(max-width: 767px)").matches;
       const lateSectionIds = new Set([
+        "menu",
         "gallery",
         "instagram",
         "testimonials",
@@ -161,21 +162,7 @@ export function useGlobalMotion(enabled = true) {
         });
       });
 
-      // ── Menu category headers pop ──
-      gsap.utils.toArray<HTMLElement>(".menu-cat-head").forEach((head) => {
-        gsap.from(head, {
-          x: -30,
-          opacity: 0,
-          skewX: -6,
-          duration: 0.65,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: head,
-            start: "top 88%",
-            toggleActions: "play none none reverse",
-          },
-        });
-      });
+      // Menu animations handled in useLateSectionMotion
 
       // Price tag elastic pop
       gsap.utils.toArray<HTMLElement>(".price-tag").forEach((tag) => {
@@ -192,91 +179,24 @@ export function useGlobalMotion(enabled = true) {
         });
       });
 
-      // ── Gallery tiles (desktop) ──
+      // Gallery hover (entrance handled in useLateSectionMotion)
       if (!isMobile) {
-      gsap.utils.toArray<HTMLElement>(".gallery-tile").forEach((tile, i) => {
-        gsap.from(tile, {
-          clipPath: "inset(100% 0 0 0)",
-          scale: 0.94,
-          opacity: 0,
-          duration: 0.85,
-          delay: (i % 3) * 0.06,
-          ease: "power4.out",
-          scrollTrigger: {
-            trigger: tile,
-            start: "top 92%",
-            toggleActions: "play none none reverse",
-          },
+        gsap.utils.toArray<HTMLElement>(".gallery-tile").forEach((tile) => {
+          const caption = tile.querySelector("figcaption span");
+          const img = tile.querySelector("img");
+          const canHover = window.matchMedia("(hover: hover) and (min-width: 768px)").matches;
+          if (caption && img && canHover) {
+            gsap.set(caption, { y: 20, opacity: 0 });
+            tile.addEventListener("mouseenter", () => {
+              gsap.to(img, { scale: 1.08, duration: 0.5, ease: "power2.out" });
+              gsap.to(caption, { y: 0, opacity: 1, duration: 0.35, ease: "power3.out" });
+            });
+            tile.addEventListener("mouseleave", () => {
+              gsap.to(img, { scale: 1, duration: 0.5, ease: "power2.out" });
+              gsap.to(caption, { y: 20, opacity: 0, duration: 0.35 });
+            });
+          }
         });
-
-        const caption = tile.querySelector("figcaption span");
-        const img = tile.querySelector("img");
-        const canHover = window.matchMedia("(hover: hover) and (min-width: 768px)").matches;
-        if (caption && img && canHover) {
-          gsap.set(caption, { y: 20, opacity: 0 });
-          tile.addEventListener("mouseenter", () => {
-            gsap.to(img, { scale: 1.08, duration: 0.5, ease: "power2.out" });
-            gsap.to(caption, { y: 0, opacity: 1, duration: 0.35, ease: "power3.out" });
-          });
-          tile.addEventListener("mouseleave", () => {
-            gsap.to(img, { scale: 1, duration: 0.5, ease: "power2.out" });
-            gsap.to(caption, { y: 20, opacity: 0, duration: 0.35 });
-          });
-        }
-      });
-      }
-
-      // ── Instagram grid (desktop) ──
-      if (!isMobile) {
-      gsap.utils.toArray<HTMLElement>(".ig-tile").forEach((tile, i) => {
-        gsap.from(tile, {
-          scale: 0.85,
-          rotation: i % 2 === 0 ? -3 : 3,
-          opacity: 0,
-          duration: 0.65,
-          delay: i * 0.05,
-          ease: "back.out(1.6)",
-          scrollTrigger: {
-            trigger: tile,
-            start: "top 90%",
-            toggleActions: "play none none reverse",
-          },
-        });
-      });
-      }
-
-      // ── FAQ rows (desktop) ──
-      if (!isMobile) {
-      gsap.utils.toArray<HTMLElement>(".faq-row").forEach((row, i) => {
-        gsap.from(row, {
-          x: i % 2 === 0 ? -24 : 24,
-          opacity: 0,
-          duration: 0.6,
-          delay: i * 0.07,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: row,
-            start: "top 92%",
-            toggleActions: "play none none reverse",
-          },
-        });
-      });
-      }
-
-      // ── Footer (desktop) ──
-      if (!isMobile) {
-      gsap.from(".footer-block", {
-        y: 40,
-        opacity: 0,
-        stagger: 0.12,
-        duration: 0.75,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: "footer",
-          start: "top 85%",
-          toggleActions: "play none none reverse",
-        },
-      });
       }
 
       gsap.utils.toArray<HTMLElement>(".social-icon").forEach((icon) => {
@@ -334,35 +254,7 @@ export function useGlobalMotion(enabled = true) {
         ease: "sine.inOut",
       });
 
-      // Order steps animated in OrderSteps.tsx
-
-      if (!isMobile) {
-      gsap.from(".contact-field", {
-        y: 24,
-        opacity: 0,
-        stagger: 0.08,
-        duration: 0.55,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: ".contact-form",
-          start: "top 85%",
-          toggleActions: "play none none reverse",
-        },
-      });
-
-      gsap.from(".contact-hero-title", {
-        skewY: 8,
-        y: 80,
-        opacity: 0,
-        duration: 1,
-        ease: "power4.out",
-        scrollTrigger: {
-          trigger: ".contact-hero-title",
-          start: "top 88%",
-          toggleActions: "play none none reverse",
-        },
-      });
-      }
+      // Late-section scroll animations handled in useLateSectionMotion
     });
 
     return () => ctx.revert();

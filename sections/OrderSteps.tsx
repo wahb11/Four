@@ -1,12 +1,9 @@
 "use client";
 
-import { useRef } from "react";
-import { Flame, SlidersHorizontal, Truck, UtensilsCrossed } from "lucide-react";
 import { ORDER_STEPS } from "@/constants/menu";
 import { AnimatedHeading } from "@/components/AnimatedHeading";
 import { SectionEyebrow } from "@/components/SectionEyebrow";
-import { useGSAP } from "@gsap/react";
-import { gsap, registerGsapPlugins } from "@/lib/gsap";
+import { Flame, SlidersHorizontal, Truck, UtensilsCrossed } from "lucide-react";
 
 const STEP_ICONS: Record<string, React.ReactNode> = {
   pick: <UtensilsCrossed className="h-10 w-10 sm:h-12 sm:w-12" strokeWidth={2} />,
@@ -16,51 +13,8 @@ const STEP_ICONS: Record<string, React.ReactNode> = {
 };
 
 export function OrderSteps() {
-  const ref = useRef<HTMLElement>(null);
-
-  useGSAP(() => {
-    registerGsapPlugins();
-    if (!ref.current) return;
-
-    const isMobile = window.matchMedia("(max-width: 767px)").matches;
-    const steps = gsap.utils.toArray<HTMLElement>(".order-step");
-
-    steps.forEach((step, i) => {
-      gsap.from(step, {
-        x: isMobile ? (i % 2 === 0 ? -32 : 32) : 0,
-        y: isMobile ? 28 : 40,
-        scale: isMobile ? 0.94 : 0.8,
-        opacity: 0,
-        duration: isMobile ? 0.62 : 0.6,
-        delay: i * (isMobile ? 0.1 : 0.15),
-        ease: "back.out(1.7)",
-        scrollTrigger: {
-          trigger: step,
-          start: isMobile ? "top 92%" : "top 70%",
-          toggleActions: "play none none none",
-        },
-      });
-
-      const icon = step.querySelector("svg");
-      if (icon && isMobile) {
-        gsap.from(icon, {
-          scale: 0,
-          rotation: -12,
-          duration: 0.5,
-          delay: i * 0.1 + 0.15,
-          ease: "back.out(2.2)",
-          scrollTrigger: {
-            trigger: step,
-            start: "top 92%",
-            toggleActions: "play none none none",
-          },
-        });
-      }
-    });
-  }, { scope: ref });
-
   return (
-    <section id="order" ref={ref} className="panel bg-four-ink py-16 sm:py-20 md:py-32">
+    <section id="order" className="panel bg-four-ink py-16 sm:py-20 md:py-32">
       <div className="section-content mx-auto max-w-7xl px-4 sm:px-5 md:px-8">
         <div className="late-section-intro mb-8 sm:mb-10 md:mb-14">
           <SectionEyebrow className="text-four-red">How to order</SectionEyebrow>

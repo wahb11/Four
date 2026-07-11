@@ -1,44 +1,19 @@
 "use client";
 
-import { useRef } from "react";
 import { MENU_CATEGORIES } from "@/constants/menu";
 import { formatPrice } from "@/lib/utils";
 import { AnimatedHeading } from "@/components/AnimatedHeading";
 import { MenuCategoryIcon } from "@/components/MenuCategoryIcon";
 import { SectionEyebrow } from "@/components/SectionEyebrow";
-import { useGSAP } from "@gsap/react";
-import { gsap, registerGsapPlugins } from "@/lib/gsap";
 
 export function MenuList() {
-  const ref = useRef<HTMLElement>(null);
-
-  useGSAP(() => {
-    registerGsapPlugins();
-    if (!ref.current) return;
-    ref.current.querySelectorAll(".menu-row").forEach((row) => {
-      gsap.from(row, {
-        y: 24,
-        opacity: 0,
-        duration: 0.5,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: row,
-          start: "top 92%",
-          toggleActions: "play none none reverse",
-        },
-      });
-    });
-  }, { scope: ref });
-
   return (
-    <section id="menu" ref={ref} className="panel relative bg-four-cream pb-24 pt-16 md:pb-32">
-      <div className="relative z-[4] mx-auto max-w-7xl px-5 md:px-8">
-        <div className="mb-12 flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-end sm:justify-between">
+    <section id="menu" className="panel relative bg-four-cream pb-24 pt-16 md:pb-32">
+      <div className="section-content mx-auto max-w-7xl px-4 sm:px-5 md:px-8">
+        <div className="late-section-intro mb-10 flex flex-col gap-4 sm:mb-12 sm:flex-row sm:flex-wrap sm:items-end sm:justify-between">
           <div className="min-w-0">
-            <SectionEyebrow className="text-four-red" data-motion="fade-up">
-              Menu
-            </SectionEyebrow>
-            <AnimatedHeading className="text-4xl tracking-tighter text-four-ink sm:text-5xl md:text-7xl">
+            <SectionEyebrow className="text-four-red">Menu</SectionEyebrow>
+            <AnimatedHeading className="text-[clamp(2rem,8vw,4.5rem)] tracking-tighter text-four-ink md:text-7xl">
               The full board
             </AnimatedHeading>
           </div>

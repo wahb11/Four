@@ -30,6 +30,13 @@ export function useLenis(enabled = true) {
     lenisRef.current = lenis;
     lenis.on("scroll", ScrollTrigger.update);
 
+    const onMenu = (e: Event) => {
+      const open = (e as CustomEvent<{ open: boolean }>).detail?.open;
+      if (open) lenis.stop();
+      else lenis.start();
+    };
+    window.addEventListener("four:mobile-menu", onMenu);
+
     const tick = (time: number) => {
       lenis.raf(time * 1000);
     };
@@ -37,6 +44,7 @@ export function useLenis(enabled = true) {
     gsap.ticker.lagSmoothing(0);
 
     return () => {
+      window.removeEventListener("four:mobile-menu", onMenu);
       gsap.ticker.remove(tick);
       lenis.destroy();
       lenisRef.current = null;
