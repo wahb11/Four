@@ -42,11 +42,11 @@ export function Hero() {
 
           <AnimatedHeading
             as="h1"
-            split="words"
+            split="lines"
             scroll={false}
-            className="max-w-[14ch] text-[clamp(2.25rem,10vw,9rem)] leading-[0.9] tracking-tighter text-four-ink sm:max-w-none"
+            className="max-w-[12ch] text-[clamp(2.25rem,10vw,9rem)] leading-[0.9] tracking-tighter text-four-ink md:max-w-[11ch]"
           >
-            FOUR BITES. ZERO REGRETS.
+            {`FOUR BITES.\nZERO REGRETS.`}
           </AnimatedHeading>
 
           <p className="hero-body mt-4 max-w-[32ch] text-[0.9375rem] leading-relaxed text-four-ink/70 sm:mt-5 sm:max-w-md sm:text-base md:mt-6 md:text-lg">

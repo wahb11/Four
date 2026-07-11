@@ -93,6 +93,14 @@ export function AnimatedHeading({
           );
         }
 
+        if (split === "lines") {
+          return (
+            <span key={`line-${i}`} className="block overflow-hidden">
+              <span className="split-part inline-block will-change-transform">{part}</span>
+            </span>
+          );
+        }
+
         return (
           <span key={`word-${i}`} className="inline-block overflow-hidden align-top">
             <span className="split-part inline-block will-change-transform">{part}</span>
