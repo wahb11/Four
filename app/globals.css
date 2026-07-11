@@ -1,0 +1,214 @@
+@import "tailwindcss";
+@import "lenis/dist/lenis.css";
+
+@theme inline {
+  --color-four-red: #9e2a2a;
+  --color-four-deep: #7a1f1f;
+  --color-four-cream: #f1e5d6;
+  --color-four-warm: #fbf6ee;
+  --color-four-ink: #151515;
+  --color-four-gold: #c9a15a;
+
+  --font-display: var(--font-anton), "Arial Black", sans-serif;
+  --font-sans: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+
+  --animate-accordion-down: accordion-down 0.3s ease-out;
+  --animate-accordion-up: accordion-up 0.3s ease-out;
+}
+
+@keyframes accordion-down {
+  from {
+    height: 0;
+    opacity: 0;
+  }
+  to {
+    height: var(--radix-accordion-content-height);
+    opacity: 1;
+  }
+}
+
+@keyframes accordion-up {
+  from {
+    height: var(--radix-accordion-content-height);
+    opacity: 1;
+  }
+  to {
+    height: 0;
+    opacity: 0;
+  }
+}
+
+@layer base {
+  :root {
+    --nav-height: 64px;
+  }
+
+  @media (min-width: 640px) {
+    :root {
+      --nav-height: 72px;
+    }
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+
+  .lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+
+  .lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+
+  body {
+    background-color: var(--color-four-cream);
+    color: var(--color-four-ink);
+    font-family: var(--font-sans);
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: var(--color-four-red);
+    color: var(--color-four-cream);
+  }
+
+  html.has-custom-cursor,
+  html.has-custom-cursor * {
+    cursor: none !important;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html.has-custom-cursor,
+    html.has-custom-cursor * {
+      cursor: auto !important;
+    }
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: var(--font-display);
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+  }
+
+  .halftone {
+    background-image: radial-gradient(rgba(21, 21, 21, 0.08) 15%, transparent 16%);
+    background-size: 10px 10px;
+  }
+
+  .comic-badge {
+    transform: skewX(-12deg);
+    box-shadow: 3px 3px 0 #151515;
+    border: 2px solid #151515;
+  }
+
+  .comic-badge > * {
+    transform: skewX(12deg);
+  }
+
+  .order-step {
+    transition: transform 0.3s ease, border-color 0.3s ease;
+  }
+
+  .scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+
+  .section-content {
+    position: relative;
+    z-index: 20;
+  }
+
+  .product-trail-wrap {
+    contain: layout style;
+    will-change: transform;
+    z-index: 10;
+  }
+
+  .product-trail-img {
+    object-fit: cover;
+    top: 0;
+    left: 0;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transform: translate3d(0, 0, 0);
+    will-change: transform, width, height;
+  }
+
+  .product-trail-img--mobile {
+    box-shadow: 0 8px 24px rgba(21, 21, 21, 0.18);
+  }
+
+  .product-trail-img--mobile.trail-presentation-hero {
+    box-shadow: 0 14px 36px rgba(21, 21, 21, 0.28);
+    outline-width: 2px;
+    outline-offset: 3px;
+  }
+
+  .product-trail-img--mobile.trail-presentation-photo {
+    box-shadow: 0 10px 28px rgba(21, 21, 21, 0.3);
+    border-width: 2px;
+    padding: 4px;
+  }
+
+  /* Hero — big circular burger on the left */
+  .trail-presentation-hero {
+    border-radius: 9999px !important;
+    box-shadow: 0 24px 60px rgba(21, 21, 21, 0.4);
+    outline: 3px solid rgba(241, 229, 214, 0.85);
+    outline-offset: 4px;
+  }
+
+  /* About — framed photo on the right */
+  .trail-presentation-photo {
+    border-radius: 4px !important;
+    box-shadow: 0 16px 40px rgba(21, 21, 21, 0.45);
+    outline: none;
+    border: 3px solid rgba(241, 229, 214, 0.9);
+    padding: 6px;
+    background: rgba(241, 229, 214, 0.15);
+  }
+
+  /* Menu — compact menu-card tile on the left */
+  .trail-presentation-menu-item {
+    border-radius: 2px !important;
+    box-shadow:
+      4px 4px 0 rgba(21, 21, 21, 0.85),
+      0 12px 28px rgba(21, 21, 21, 0.2);
+    outline: 2px solid rgba(21, 21, 21, 0.9);
+    outline-offset: 0;
+    border: none;
+  }
+
+  /* Signature dock — flat, no decoration */
+  .trail-presentation-dock {
+    border-radius: 0 !important;
+    box-shadow: none;
+    outline: none;
+    border: none;
+    padding: 0;
+    background: transparent;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

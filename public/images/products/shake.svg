@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" fill="none">
+  <defs>
+    <filter id="s" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="12" stdDeviation="10" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+  <g filter="url(#s)">
+    <ellipse cx="120" cy="210" rx="40" ry="8" fill="#151515" opacity="0.2"/>
+    <path d="M85 90c0-30 15-50 35-50s35 20 35 50v90H85V90z" fill="#FBF6EE" stroke="#151515" stroke-width="4"/>
+    <path d="M85 120c10 20 55 20 70 0" fill="#C9A15A"/>
+    <ellipse cx="120" cy="70" rx="42" ry="18" fill="#FBF6EE" stroke="#151515" stroke-width="4"/>
+    <circle cx="105" cy="100" r="6" fill="#5C3A1E"/>
+    <circle cx="130" cy="110" r="5" fill="#5C3A1E"/>
+    <circle cx="115" cy="130" r="4" fill="#5C3A1E"/>
+    <path d="M100 55 Q120 40 140 55" stroke="#9E2A2A" stroke-width="6" fill="none" stroke-linecap="round"/>
+    <rect x="112" y="175" width="16" height="30" rx="4" fill="#151515"/>
+  </g>
+</svg>

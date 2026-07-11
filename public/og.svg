@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" fill="none">
+  <rect width="1200" height="630" fill="#9E2A2A"/>
+  <rect x="40" y="40" width="1120" height="550" fill="none" stroke="#F1E5D6" stroke-width="6" opacity="0.4"/>
+  <text x="600" y="320" text-anchor="middle" font-family="Arial Black, sans-serif" font-size="160" fill="#F1E5D6" letter-spacing="-8">FOUR</text>
+  <text x="600" y="400" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" fill="#F1E5D6" opacity="0.85" letter-spacing="8">FOUR BITES. ZERO REGRETS.</text>
+</svg>
